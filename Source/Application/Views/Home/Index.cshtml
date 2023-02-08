@@ -1,0 +1,36 @@
+﻿@model HomeViewModel
+<div class="card alert-danger">
+	<div class="card-header">
+		<h1 class="h4 m-0 p-0">
+			Ldap-lab
+		</h1>
+	</div>
+	<div class="card-body">
+		<partial model="@Model.ConnectionSelectionForm" name="ConnectionSelectionForm" />
+		@if(Model.ConnectionStringName != null)
+		{
+			<div class="alert alert-info mt-3">
+				<h2 class="h5">ConnectionString</h2>
+				@if(Model.MaskedConnectionString == null)
+				{
+					<em>null</em>
+				}
+				else
+				{
+					<div class="bg-light p-2">
+						<code>&quot;@Model.MaskedConnectionString&quot;</code>
+					</div>
+				}
+			</div>
+			<partial name="ValidationSummary" />
+			<partial model="@Model.ConnectionOptionsForm" name="ConnectionOptionsForm" />
+		}
+		@if(ViewContext.ModelState.IsValid && Model.Message != null)
+		{
+			<div class="alert alert-success mt-3" id="result">
+				<h2 class="h5">Result</h2>
+				@Model.Message
+			</div>
+		}
+	</div>
+</div>

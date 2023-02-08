@@ -1,0 +1,21 @@
+﻿@model ConnectionSelectionForm
+<form asp-action="Index" asp-controller="Home" class="border border-1 border-secondary border-opacity-75 p-3 rounded-3" method="get">
+	<div class="mb-3">
+		<label asp-for="ConnectionStringName"></label>
+		<select aria-describedby="connection-string-name-hint" asp-for="ConnectionStringName" asp-items="@Model.ConnectionStringNames" autofocus="autofocus" class="form-control"></select>
+		<div id="connection-string-name-hint" class="form-text">@Model.ConnectionStringNameHint</div>
+	</div>
+	<div class="mb-3">
+		<input aria-describedby="bind-only-hint" checked="@(Model.BindOnly ? "checked" : null)" class="form-check-input" id="bind-only-input" name="@nameof(Model.BindOnly)" type="checkbox" value="true" />
+		<label class="d-inline" for="bind-only-input">Bind only</label>
+		<div id="bind-only-hint" class="form-text">@Model.BindOnlyHint</div>
+	</div>
+	<div class="mb-3">
+		<input aria-describedby="override-credential-password-hint" checked="@(Model.OverrideCredentialPassword ? "checked" : null)" class="form-check-input" id="override-credential-password-input" name="@nameof(Model.OverrideCredentialPassword)" type="checkbox" value="true" />
+		<label class="d-inline" for="override-credential-password-input">Override credential-password</label>
+		<div id="override-credential-password-hint" class="form-text">@Model.OverrideCredentialPasswordHint</div>
+	</div>
+	<div class="text-end">
+		<button class="btn btn-primary" type="submit">Select</button>
+	</div>
+</form>

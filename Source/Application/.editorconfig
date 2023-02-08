@@ -1,0 +1,10 @@
+# Suppress
+[*.cs]
+#dotnet_diagnostic.CA1056.severity = none
+#dotnet_diagnostic.IDE0045.severity = none
+
+[/Controllers/*.cs]
+#dotnet_diagnostic.CA2007.severity = none
+
+[/Program.cs]
+dotnet_diagnostic.CA1305.severity = none

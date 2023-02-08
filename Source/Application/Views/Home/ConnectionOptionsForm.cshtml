@@ -1,0 +1,87 @@
+﻿@model ConnectionOptionsForm
+<form asp-action="Index" asp-all-route-data="@Context.Request.Query.ToSortedDictionary()" asp-controller="Home" asp-fragment="result" class="border border-1 border-secondary border-opacity-75 p-3 rounded-3">
+	<div class="mb-3">
+		<label asp-for="Servers"></label>
+		<input aria-describedby="servers-hint" asp-for="Servers" class="form-control" />
+		<div id="servers-hint" class="form-text">@Model.ServersHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="Port"></label>
+		<input aria-describedby="port-hint" asp-for="Port" class="form-control" max="@ushort.MaxValue" min="@ushort.MinValue" type="number" />
+		<div id="port-hint" class="form-text">@Model.PortHint</div>
+	</div>
+	<div class="mb-3">
+		<input aria-describedby="ssl-hint" checked="@(Model.SecureSocketsLayer ? "checked" : null)" class="form-check-input" id="ssl-input" name="@nameof(Model.SecureSocketsLayer)" type="checkbox" value="true" />
+		<label class="d-inline" for="ssl-input">SSL/TLS</label>
+		<div id="ssl-hint" class="form-text">@Model.SecureSocketsLayerHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="AuthenticationType"></label>
+		<select aria-describedby="authentication-type-hint" asp-for="AuthenticationType" asp-items="@Model.AuthenticationTypes" class="form-control"></select>
+		<div id="authentication-type-hint" class="form-text">@Model.AuthenticationTypeHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="ProtocolVersion"></label>
+		<input aria-describedby="protocol-version-hint" asp-for="ProtocolVersion" class="form-control" max="@byte.MaxValue" min="@byte.MinValue" type="number" />
+		<div id="protocol-version-hint" class="form-text">@Model.ProtocolVersionHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="Timeout"></label>
+		<input aria-describedby="timeout-hint" asp-for="Timeout" class="form-control" max="@ushort.MaxValue" min="@ushort.MinValue" type="number" />
+		<div id="timeout-hint" class="form-text">@Model.TimeoutHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="CredentialDomain"></label>
+		<input aria-describedby="credential-domain-hint" asp-for="CredentialDomain" class="form-control" />
+		<div id="credential-domain-hint" class="form-text">@Model.CredentialDomainHint</div>
+	</div>
+	<div class="mb-3">
+		<label asp-for="CredentialUserName"></label>
+		<input aria-describedby="credential-user-name-hint" asp-for="CredentialUserName" class="form-control" />
+		<div id="credential-user-name-hint" class="form-text">@Model.CredentialUserNameHint</div>
+	</div>
+	@if(Model.OverrideCredentialPassword)
+	{
+		<div class="mb-3">
+			<label asp-for="CredentialPassword"></label>
+			<input aria-describedby="credential-password-hint" asp-for="CredentialPassword" autocomplete="off" class="form-control" />
+			<div id="credential-password-hint" class="form-text">@Model.CredentialPasswordHint</div>
+		</div>
+	}
+	@if(!Model.BindOnly)
+	{
+		<div class="mb-3">
+			<label asp-for="Attributes"></label>
+			<input aria-describedby="attributes-hint" asp-for="Attributes" class="form-control" />
+			<div id="attributes-hint" class="form-text">@Model.AttributesHint</div>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Filter"></label>
+			<input aria-describedby="filter-hint" asp-for="Filter" class="form-control" />
+			<div id="filter-hint" class="form-text">@Model.FilterHint</div>
+		</div>
+		<div class="mb-3">
+			<input aria-describedby="paging-enabled-hint" checked="@(Model.PagingEnabled ? "checked" : null)" class="form-check-input" id="paging-enabled-input" name="@nameof(Model.PagingEnabled)" type="checkbox" value="true" />
+			<label class="d-inline" for="paging-enabled-input">Paging enabled</label>
+			<div id="paging-enabled-hint" class="form-text">@Model.PagingEnabledHint</div>
+		</div>
+		<div class="mb-3">
+			<label asp-for="PageSize"></label>
+			<input aria-describedby="page-size-hint" asp-for="PageSize" class="form-control" max="@ushort.MaxValue" min="@ushort.MinValue" type="number" />
+			<div id="page-size-hint" class="form-text">@Model.PageSizeHint</div>
+		</div>
+		<div class="mb-3">
+			<label asp-for="RootDistinguishedName"></label>
+			<input aria-describedby="root-distinguished-name-hint" asp-for="RootDistinguishedName" class="form-control" />
+			<div id="root-distinguished-name-hint" class="form-text">@Model.RootDistinguishedNameHint</div>
+		</div>
+		<div class="mb-3">
+			<label asp-for="SearchScope"></label>
+			<select aria-describedby="search-scope-hint" asp-for="SearchScope" asp-items="@Model.SearchScopes" class="form-control"></select>
+			<div id="search-scope-hint" class="form-text">@Model.SearchScopeHint</div>
+		</div>
+	}
+	<div class="text-end">
+		<button class="btn btn-primary" type="submit">@(Model.BindOnly ? "Bind" : "Search")</button>
+	</div>
+</form>
