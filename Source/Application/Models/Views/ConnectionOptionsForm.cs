@@ -55,7 +55,7 @@ namespace Application.Models.Views
 		[Display(Name = "Port")]
 		public virtual ushort? Port { get; set; }
 
-		public virtual string PortHint => "Enter a port, eg. 389, 636, 1389 or 1636.";
+		public virtual string PortHint => "Enter a port, eg. 389, 636 (SSL), 3268 or 3269 (SSL)";
 
 		[Display(Name = "Protocol-version")]
 		public virtual byte? ProtocolVersion { get; set; }
